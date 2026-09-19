@@ -43,10 +43,18 @@ Ensure you have the following installed:
 
 ## 🛠️ Tech Stack
 
+**Frontend**
 - **Framework**: [Next.js](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+
+**AI Backend (GIF OCR)**
+- **Language**: [Python](https://www.python.org/)
+- **OCR Engine**: [EasyOCR](https://github.com/JaidedAI/EasyOCR)
+- **Image Processing**: [OpenCV](https://opencv.org/)
+
+**Core**
 - **State Management**: React Context API / Zustand (TBD)
 - **Database**: Firebase / Supabase (TBD)
 - **Authentication**: NextAuth.js (TBD)
@@ -55,6 +63,10 @@ Ensure you have the following installed:
 
 ```
 Meme-It/
+├── ai-engine/         # Python background worker for GIF OCR
+│   ├── src/           # Python source code
+│   ├── main.py        # Entry point
+│   └── requirements.txt # Python dependencies
 ├── app/               # Next.js 14 App Router
 │   ├── api/           # API routes
 │   ├── assets/        # Static assets
