@@ -1,0 +1,5 @@
+easyocr
+opencv-python
+requests
+python-dotenv
+supabase
