@@ -30,16 +30,42 @@ Ensure you have the following installed:
    cd Meme-It
    ```
 
-2. **Install dependencies**
+2. **Install Frontend Dependencies**
    ```bash
    npm install
    ```
 
-3. **Run the application**
+3. **Install AI Engine Dependencies (Required for GIF OCR)**
+   It is highly recommended to use a virtual environment.
    ```bash
-   npm run dev
+   cd ai-engine
+   python -m venv venv
+   
+   # Activate virtual environment (Windows):
+   .\venv\Scripts\activate
+   # Activate virtual environment (macOS/Linux):
+   # source venv/bin/activate
+   
+   pip install -r requirements.txt
+   cd ..
    ```
-   The application will start on `http://localhost:3000`.
+
+### Running the Application
+
+To run the full stack, you will need two separate terminal windows.
+
+**Terminal 1: Run the Next.js Frontend**
+```bash
+npm run dev
+```
+The frontend will start on `http://localhost:3000`.
+
+**Terminal 2: Run the Python AI Engine**
+```bash
+cd ai-engine
+# Ensure your virtual environment is activated first
+python main.py
+```
 
 ## 🛠️ Tech Stack
 
