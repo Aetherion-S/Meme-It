@@ -1,132 +1,36 @@
-# Meme-It
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A cutting-edge social media application built with Next.js and TypeScript, designed for seamless sharing and discovery of viral memes. Meme-It features a modern, dynamic interface with real-time updates, personalized feeds, and intuitive user interactions.
+## Getting Started
 
-## 🌟 Features
+First, run the development server:
 
-- **⚡ Blazing Fast Performance**: Built on Next.js with optimized routing and rendering.
-- **✨ Modern UI/UX**: A sleek and responsive design that feels premium and intuitive.
-- **📝 Rich Text Editing**: Create memes with custom text styling and formatting.
-- **🖼️ Advanced Image Editing**: Enhance your memes with built-in photo editing tools.
-- **🌐 Dynamic Content Discovery**: Explore trending and personalized meme feeds.
-
-## 🚀 Getting Started
-
-Follow these instructions to get a copy of the project up and running on your local machine.
-
-### Prerequisites
-
-Ensure you have the following installed:
-
-- **Node.js** (v18.x or higher)
-- **npm** (or yarn)
-- **Git**
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Aetherion-S/Meme-It.git
-   cd Meme-It
-   ```
-
-2. **Install Frontend Dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Install AI Engine Dependencies (Required for GIF OCR)**
-   It is highly recommended to use a virtual environment.
-   ```bash
-   cd ai-engine
-   python -m venv venv
-   
-   # Activate virtual environment (Windows):
-   .\venv\Scripts\activate
-   # Activate virtual environment (macOS/Linux):
-   # source venv/bin/activate
-   
-   pip install -r requirements.txt
-   cd ..
-   ```
-
-### Running the Application
-
-To run the full stack, you will need two separate terminal windows.
-
-**Terminal 1: Run the Next.js Frontend**
 ```bash
 npm run dev
-```
-The frontend will start on `http://localhost:3000`.
-
-**Terminal 2: Run the Python AI Engine**
-```bash
-cd ai-engine
-# Ensure your virtual environment is activated first
-python main.py
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## 🛠️ Tech Stack
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-**Frontend**
-- **Framework**: [Next.js](https://nextjs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-**AI Backend (GIF OCR)**
-- **Language**: [Python](https://www.python.org/)
-- **OCR Engine**: [EasyOCR](https://github.com/JaidedAI/EasyOCR)
-- **Image Processing**: [OpenCV](https://opencv.org/)
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-**Core**
-- **State Management**: React Context API / Zustand (TBD)
-- **Database**: Firebase / Supabase (TBD)
-- **Authentication**: NextAuth.js (TBD)
+## Learn More
 
-## 📂 Project Structure
+To learn more about Next.js, take a look at the following resources:
 
-```
-Meme-It/
-├── ai-engine/         # Python background worker for GIF OCR
-│   ├── src/           # Python source code
-│   ├── main.py        # Entry point
-│   └── requirements.txt # Python dependencies
-├── app/               # Next.js 14 App Router
-│   ├── api/           # API routes
-│   ├── assets/        # Static assets
-│   ├── components/    # Reusable UI components
-│   ├── lib/           # Utility functions and helpers
-│   ├── providers/     # Context providers
-│   ├── store/         # Global state management
-│   └── ...            # Root layout and pages
-├── public/            # Publicly accessible files
-├── styles/            # Global styles
-└── .gitignore         # Files to ignore in version control
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## 🎨 Customization
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-You can customize the application's appearance and configuration by editing the following files:
+## Deploy on Vercel
 
-- **`.env.local`**: Add your API keys and environment variables.
-- **`tailwind.config.ts`**: Customize Tailwind CSS theme and configuration.
-- **`src/styles/globals.css`**: Global CSS styles and Tailwind directives.
-- **`src/components/ui/`**: Customize UI components from shadcn/ui.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## 🤝 Contributing
-
-Contributions are always welcome! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-For questions or issues, please open an issue on the GitHub repository.
-
----
-
-Made with ❤️ by [Your Name/Team Name]
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
