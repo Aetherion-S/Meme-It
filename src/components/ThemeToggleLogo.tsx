@@ -50,20 +50,28 @@ export function ThemeToggleLogo() {
 
   if (!mounted) {
     return (
-      <img 
-        src="/logo.jpg" 
-        alt="MemeIt Logo" 
-        className="w-10 h-10 rounded-xl cursor-pointer" 
-      />
+      <button type="button" aria-label="Toggle theme" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl">
+        <img 
+          src="/logo.jpg" 
+          alt="MemeIt Logo" 
+          className="w-10 h-10 rounded-xl cursor-pointer" 
+        />
+      </button>
     )
   }
 
   return (
-    <img 
-      src="/logo.jpg" 
-      alt="MemeIt Logo" 
-      onClick={toggleTheme}
-      className="w-10 h-10 rounded-xl hover:rotate-[360deg] transition-transform duration-700 ease-in-out cursor-pointer relative z-[100]" 
-    />
+    <button 
+      type="button" 
+      onClick={toggleTheme} 
+      aria-label="Toggle theme"
+      className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl relative z-[100]"
+    >
+      <img 
+        src="/logo.jpg" 
+        alt="MemeIt Logo" 
+        className="w-10 h-10 rounded-xl hover:rotate-[360deg] transition-transform duration-700 ease-in-out cursor-pointer" 
+      />
+    </button>
   )
 }
