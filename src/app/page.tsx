@@ -18,14 +18,14 @@ export default function Home() {
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 font-sans transition-colors duration-300">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full backdrop-blur border-b border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-black/70">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-6 h-16 flex items-center justify-between relative">
           {/* Left: Title */}
           <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 shrink-0">
             Meme<span className="text-blue-500">It</span>
           </h1>
 
           {/* Center: Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-8 font-medium text-sm text-neutral-600 dark:text-neutral-300">
+          <nav className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center space-x-8 font-medium text-sm text-neutral-600 dark:text-neutral-300">
             <a href="#" className="hover:text-blue-500 transition-colors">Category</a>
             <a href="https://giphy.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">Giphy</a>
             <a href="#" className="hover:text-blue-500 transition-colors">Favorites</a>
@@ -33,14 +33,14 @@ export default function Home() {
 
           {/* Right: Search Bar */}
           <div className="flex items-center shrink-0">
-            <div className="relative">
+            <div className="relative group">
               <input 
                 type="text" 
                 placeholder="Search memes..." 
-                className="pl-9 pr-4 py-1.5 text-sm rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full sm:w-48 transition-all text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500"
+                className="h-9 w-9 pl-9 pr-3 text-sm rounded-full bg-neutral-100 dark:bg-neutral-900 border border-transparent hover:border-neutral-200 dark:hover:border-neutral-800 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:w-48 focus:w-48 [&:not(:placeholder-shown)]:w-48 transition-all duration-300 ease-out text-neutral-900 dark:text-neutral-100 placeholder:text-transparent hover:placeholder:text-neutral-500 focus:placeholder:text-neutral-500 [&:not(:placeholder-shown)]:placeholder:text-neutral-500 cursor-pointer focus:cursor-text"
               />
               <svg 
-                className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500" 
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500 pointer-events-none" 
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="none" 
                 viewBox="0 0 24 24" 

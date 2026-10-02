@@ -17,13 +17,18 @@ export const metadata: Metadata = {
   description: "A minimalistic space for maximum laughs. Scroll through the finest curated GIFs on the internet.",
 };
 
+import { ScrollProgress } from "@/components/ScrollProgress";
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ScrollProgress />
+        {children}
+      </body>
     </html>
   );
 }
