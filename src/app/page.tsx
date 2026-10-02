@@ -1,15 +1,16 @@
 import Image from "next/image";
+import { LikeButton } from "@/components/LikeButton";
 
 const memes = [
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjR6cHFyNzRzb3JvdHNtNXdweWNyeDNnbGg1MzAwNGVybndxeGQwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LqT2G1c1I1p6y55t5d/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTVudHlqZTZyeWtueDVyMjYwbm0waDBpeGdja3RtcHBwaDBiZmxyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aLdiZJbpEbVks/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXpmbHk5OXM5NXRsZDk0ZDUyb2E5NzR0bWxqcWlkbHRsMzUyc2oxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKSjRrfIPjeiVyM/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnlyMTBndThxZGhjMGE3OXB6d3NsdzNyOGVtcDFkdmI1bGR3M3E4NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExamhzcmU5cHR1eDJxbjFqZGk4cWc2cXFhMmpxNjUzazQ1OGVudjE3eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lFw057lAJQMwg0/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1tNjBicDJtdGNlcm4wNDhzdDVydXlueDQyMm16aDhnZDd3dzUweCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11sBLVxNs7v6WA/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGJxbGJxbThscDVhZDhsbTNtZG0wYXNsb3lkZ2I3dnY1aWFqZGVtayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7abKhOpu0NwenH3O/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRnMnNtbWFjNnE5dmhkYXFxcWFxcWFxcWFxcWFxcWFxcWFxcWFxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVqNDJnYzBseTJtd3h1OG0ycmE4Y3JqMjRtcXQ5N3MxeWZwdzIyaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ICOgUNjpvO0PC/giphy.gif",
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjR6cHFyNzRzb3JvdHNtNXdweWNyeDNnbGg1MzAwNGVybndxeGQwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LqT2G1c1I1p6y55t5d/giphy.gif", width: 480, height: 360, alt: "A funny cat typing rapidly on a computer keyboard" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTVudHlqZTZyeWtueDVyMjYwbm0waDBpeGdja3RtcHBwaDBiZmxyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aLdiZJbpEbVks/giphy.gif", width: 480, height: 480, alt: "A person blinking in disbelief with a confused expression" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXpmbHk5OXM5NXRsZDk0ZDUyb2E5NzR0bWxqcWlkbHRsMzUyc2oxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKSjRrfIPjeiVyM/giphy.gif", width: 480, height: 270, alt: "Two people giving each other an enthusiastic high five" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnlyMTBndThxZGhjMGE3OXB6d3NsdzNyOGVtcDFkdmI1bGR3M3E4NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif", width: 480, height: 360, alt: "A cute dog nodding in agreement" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExamhzcmU5cHR1eDJxbjFqZGk4cWc2cXFhMmpxNjUzazQ1OGVudjE3eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lFw057lAJQMwg0/giphy.gif", width: 480, height: 480, alt: "A dramatic zoom in on a surprised face" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1tNjBicDJtdGNlcm4wNDhzdDVydXlueDQyMm16aDhnZDd3dzUweCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11sBLVxNs7v6WA/giphy.gif", width: 480, height: 320, alt: "A monkey eating a banana with a funny facial expression" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGJxbGJxbThscDVhZDhsbTNtZG0wYXNsb3lkZ2I3dnY1aWFqZGVtayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7abKhOpu0NwenH3O/giphy.gif", width: 480, height: 360, alt: "Someone excitedly eating popcorn while watching drama" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRnMnNtbWFjNnE5dmhkYXFxcWFxcWFxcWFxcWFxcWFxcWFxcWFxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif", width: 480, height: 480, alt: "A cat sleeping peacefully in a strange position" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVqNDJnYzBseTJtd3h1OG0ycmE4Y3JqMjRtcXQ5N3MxeWZwdzIyaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ICOgUNjpvO0PC/giphy.gif", width: 480, height: 270, alt: "A thumbs up gesture of approval" },
 ];
 
 export default function Home() {
@@ -21,11 +22,6 @@ export default function Home() {
           <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
             Meme<span className="text-blue-500">It</span>
           </h1>
-          <nav className="flex items-center gap-4 text-sm font-medium text-neutral-600 dark:text-neutral-300">
-            <a href="#" className="hover:text-black dark:hover:text-white transition-colors">Trending</a>
-            <a href="#" className="hover:text-black dark:hover:text-white transition-colors">Categories</a>
-            <a href="#" className="hover:text-black dark:hover:text-white transition-colors">Submit</a>
-          </nav>
         </div>
       </header>
 
@@ -42,14 +38,16 @@ export default function Home() {
 
         {/* Meme Grid */}
         <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-          {memes.map((src, idx) => (
+          {memes.map((meme, idx) => (
             <div 
               key={idx} 
               className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800"
             >
               <img
-                src={src}
-                alt={`Meme ${idx + 1}`}
+                src={meme.src}
+                alt={meme.alt}
+                width={meme.width}
+                height={meme.height}
                 className="w-full h-auto object-cover"
                 loading="lazy"
               />
@@ -57,11 +55,7 @@ export default function Home() {
                 <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
                   Meme {idx + 1}
                 </span>
-                <button className="text-neutral-400 hover:text-red-500 transition-colors" aria-label="Like meme">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                  </svg>
-                </button>
+                <LikeButton />
               </div>
             </div>
           ))}

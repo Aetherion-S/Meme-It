@@ -4,7 +4,10 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
-  allowedDevOrigins: ['10.111.124.94'],
+  allowedDevOrigins: process.env.ALLOWED_DEV_ORIGINS
+    ?.split(",")
+    .map((origin) => origin.trim())
+    .filter((origin) => origin.length > 0) ?? [],
 };
 
 export default nextConfig;
