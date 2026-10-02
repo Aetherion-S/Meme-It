@@ -1,67 +1,64 @@
 import Image from "next/image";
+import { LikeButton } from "@/components/LikeButton";
+
+const memes = [
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjR6cHFyNzRzb3JvdHNtNXdweWNyeDNnbGg1MzAwNGVybndxeGQwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LqT2G1c1I1p6y55t5d/giphy.gif", width: 480, height: 360, alt: "A funny cat typing rapidly on a computer keyboard" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTVudHlqZTZyeWtueDVyMjYwbm0waDBpeGdja3RtcHBwaDBiZmxyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aLdiZJbpEbVks/giphy.gif", width: 480, height: 480, alt: "A person blinking in disbelief with a confused expression" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXpmbHk5OXM5NXRsZDk0ZDUyb2E5NzR0bWxqcWlkbHRsMzUyc2oxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKSjRrfIPjeiVyM/giphy.gif", width: 480, height: 270, alt: "Two people giving each other an enthusiastic high five" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnlyMTBndThxZGhjMGE3OXB6d3NsdzNyOGVtcDFkdmI1bGR3M3E4NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif", width: 480, height: 360, alt: "A cute dog nodding in agreement" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExamhzcmU5cHR1eDJxbjFqZGk4cWc2cXFhMmpxNjUzazQ1OGVudjE3eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lFw057lAJQMwg0/giphy.gif", width: 480, height: 480, alt: "A dramatic zoom in on a surprised face" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1tNjBicDJtdGNlcm4wNDhzdDVydXlueDQyMm16aDhnZDd3dzUweCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11sBLVxNs7v6WA/giphy.gif", width: 480, height: 320, alt: "A monkey eating a banana with a funny facial expression" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGJxbGJxbThscDVhZDhsbTNtZG0wYXNsb3lkZ2I3dnY1aWFqZGVtayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7abKhOpu0NwenH3O/giphy.gif", width: 480, height: 360, alt: "Someone excitedly eating popcorn while watching drama" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRnMnNtbWFjNnE5dmhkYXFxcWFxcWFxcWFxcWFxcWFxcWFxcWFxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif", width: 480, height: 480, alt: "A cat sleeping peacefully in a strange position" },
+  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVqNDJnYzBseTJtd3h1OG0ycmE4Y3JqMjRtcXQ5N3MxeWZwdzIyaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ICOgUNjpvO0PC/giphy.gif", width: 480, height: 270, alt: "A thumbs up gesture of approval" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 font-sans transition-colors duration-300">
+      {/* Header */}
+      <header className="sticky top-0 z-50 w-full backdrop-blur border-b border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-black/70">
+        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+          <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+            Meme<span className="text-blue-500">It</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="container mx-auto px-6 py-12">
+        <div className="mb-12 text-center">
+          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4">
+            Discover the best memes.
+          </h2>
+          <p className="text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto">
+            A minimalistic space for maximum laughs. Scroll through the finest curated GIFs on the internet.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Meme Grid */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+          {memes.map((meme, idx) => (
+            <div 
+              key={idx} 
+              className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800"
+            >
+              <img
+                src={meme.src}
+                alt={meme.alt}
+                width={meme.width}
+                height={meme.height}
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
+              <div className="p-4 flex items-center justify-between">
+                <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
+                  Meme {idx + 1}
+                </span>
+                <LikeButton />
+              </div>
+            </div>
+          ))}
         </div>
       </main>
     </div>

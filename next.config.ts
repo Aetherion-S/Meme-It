@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  turbopack: {
+    root: process.cwd(),
+  },
+  allowedDevOrigins: process.env.ALLOWED_DEV_ORIGINS
+    ?.split(",")
+    .map((origin) => origin.trim())
+    .filter((origin) => origin.length > 0) ?? [],
 };
 
 export default nextConfig;
