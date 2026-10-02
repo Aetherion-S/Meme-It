@@ -7,7 +7,6 @@
 CREATE TABLE public.users (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
     username TEXT UNIQUE NOT NULL,
-    email TEXT UNIQUE NOT NULL,
     profile_url TEXT,
     bio TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -88,5 +87,21 @@ ALTER TABLE public.likes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.comments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.follows ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.meme_ocr ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.tags ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.meme_tags ENABLE ROW LEVEL SECURITY;
 
--- Note: You'll need to define specific policies (e.g., "Users can only update their own profile", "Anyone can view public memes") in the Supabase Dashboard.
+-- Policies for public.users
+CREATE POLICY "users_select_all" ON public.users FOR SELECT USING (true);
+CREATE POLICY "users_update_own" ON public.users FOR UPDATE USING (auth.uid() = id);
+
+-- Trigger to automatically create a profile for new auth users
+CREATE FUNCTION public.handle_new_user() RETURNS trigger
+LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$
+BEGIN
+  INSERT INTO public.users (id, username)
+  VALUES (NEW.id, NEW.raw_user_meta_data->>'username');
+  RETURN NEW;
+END $$;
+
+CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users
+FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();

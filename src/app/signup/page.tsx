@@ -177,15 +177,7 @@ export default function SignupPage() {
       setLoading(false)
     } else if (data.session) {
       // User is verified!
-      // Attempt to insert public user profile (Assuming RLS allows it, or you setup a Postgres trigger)
-      const { error: profileError } = await supabase
-        .from('users')
-        .insert({ id: data.session.user.id, username, email })
-
-      if (profileError) {
-        console.error("Profile creation failed:", profileError)
-        // Non-blocking error, user is still authenticated
-      }
+      // The Postgres trigger `on_auth_user_created` automatically creates the public.users profile.
       
       router.push('/')
       router.refresh()
