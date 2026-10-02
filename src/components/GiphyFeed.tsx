@@ -102,18 +102,18 @@ export function GiphyFeed() {
       <div className="max-w-2xl mx-auto">
         <form onSubmit={handleSearch} className="relative group">
           <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-gray-400 group-focus-within:text-black transition-colors" />
+            <Search className="h-5 w-5 text-muted-foreground group-focus-within:text-foreground transition-colors" />
           </div>
           <input
             type="text"
             placeholder="Search for memes, reactions, or emotions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white/50 backdrop-blur-md border border-gray-200 rounded-full py-4 pl-12 pr-6 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm text-lg transition-all"
+            className="w-full bg-background/50 backdrop-blur-md border border-border rounded-full py-4 pl-12 pr-6 focus:outline-none focus:ring-2 focus:ring-foreground/5 shadow-sm text-lg transition-all"
           />
           <button 
             type="submit" 
-            className="absolute inset-y-2 right-2 bg-[#111] text-white px-6 rounded-full font-medium hover:bg-black transition-colors"
+            className="absolute inset-y-2 right-2 bg-primary text-primary-foreground px-6 rounded-full font-medium hover:bg-primary/90 transition-colors"
           >
             {isSearching ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Search'}
           </button>
@@ -136,7 +136,7 @@ export function GiphyFeed() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: (idx % 10) * 0.05 }}
-              className="break-inside-avoid relative group rounded-2xl overflow-hidden bg-gray-100 shadow-sm hover:shadow-xl transition-all"
+              className="break-inside-avoid relative group rounded-2xl overflow-hidden bg-muted shadow-sm hover:shadow-xl transition-all"
             >
               <img
                 src={gif.images.fixed_width.url}
@@ -166,7 +166,7 @@ export function GiphyFeed() {
       {/* Loading & Infinite Scroll Target */}
       <div ref={observerTarget} className="h-20 flex items-center justify-center">
         {loading && GIPHY_API_KEY && (
-          <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+          <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
         )}
       </div>
     </div>
