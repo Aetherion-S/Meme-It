@@ -1,46 +1,37 @@
-import Image from "next/image";
-import { LikeButton } from "@/components/LikeButton";
-
-const memes = [
-  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjR6cHFyNzRzb3JvdHNtNXdweWNyeDNnbGg1MzAwNGVybndxeGQwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LqT2G1c1I1p6y55t5d/giphy.gif", width: 480, height: 360, alt: "A funny cat typing rapidly on a computer keyboard" },
-  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTVudHlqZTZyeWtueDVyMjYwbm0waDBpeGdja3RtcHBwaDBiZmxyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aLdiZJbpEbVks/giphy.gif", width: 480, height: 480, alt: "A person blinking in disbelief with a confused expression" },
-  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXpmbHk5OXM5NXRsZDk0ZDUyb2E5NzR0bWxqcWlkbHRsMzUyc2oxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKSjRrfIPjeiVyM/giphy.gif", width: 480, height: 270, alt: "Two people giving each other an enthusiastic high five" },
-  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnlyMTBndThxZGhjMGE3OXB6d3NsdzNyOGVtcDFkdmI1bGR3M3E4NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif", width: 480, height: 360, alt: "A cute dog nodding in agreement" },
-  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExamhzcmU5cHR1eDJxbjFqZGk4cWc2cXFhMmpxNjUzazQ1OGVudjE3eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lFw057lAJQMwg0/giphy.gif", width: 480, height: 480, alt: "A dramatic zoom in on a surprised face" },
-  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1tNjBicDJtdGNlcm4wNDhzdDVydXlueDQyMm16aDhnZDd3dzUweCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11sBLVxNs7v6WA/giphy.gif", width: 480, height: 320, alt: "A monkey eating a banana with a funny facial expression" },
-  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGJxbGJxbThscDVhZDhsbTNtZG0wYXNsb3lkZ2I3dnY1aWFqZGVtayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7abKhOpu0NwenH3O/giphy.gif", width: 480, height: 360, alt: "Someone excitedly eating popcorn while watching drama" },
-  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRnMnNtbWFjNnE5dmhkYXFxcWFxcWFxcWFxcWFxcWFxcWFxcWFxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif", width: 480, height: 480, alt: "A cat sleeping peacefully in a strange position" },
-  { src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVqNDJnYzBseTJtd3h1OG0ycmE4Y3JqMjRtcXQ5N3MxeWZwdzIyaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ICOgUNjpvO0PC/giphy.gif", width: 480, height: 270, alt: "A thumbs up gesture of approval" },
-];
+import { GiphyFeed } from "@/components/GiphyFeed";
+import { ThemeToggleLogo } from "@/components/ThemeToggleLogo";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-background font-sans">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full backdrop-blur border-b border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-black/70">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between relative">
-          {/* Left: Title */}
-          <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 shrink-0">
-            Meme<span className="text-blue-500">It</span>
-          </h1>
+      <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-border bg-background/80">
+        <div className="container mx-auto px-6 h-16 sm:h-20 flex items-center justify-between relative">
+          {/* Left: Logo & Title */}
+          <div className="flex items-center gap-3 shrink-0">
+            <ThemeToggleLogo />
+            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
+              Meme<span className="text-primary">It</span>
+            </h1>
+          </div>
 
           {/* Center: Navigation Links */}
-          <nav className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center space-x-8 font-medium text-sm text-neutral-600 dark:text-neutral-300">
-            <a href="#" className="hover:text-blue-500 transition-colors">Category</a>
-            <a href="https://giphy.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">Giphy</a>
-            <a href="#" className="hover:text-blue-500 transition-colors">Favorites</a>
+          <nav className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center space-x-8 font-medium text-sm text-muted-foreground">
+            <a href="#" className="hover:text-foreground transition-colors">Category</a>
+            <a href="https://giphy.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Giphy</a>
+            <a href="#" className="hover:text-foreground transition-colors">Favorites</a>
           </nav>
 
-          {/* Right: Search Bar */}
-          <div className="flex items-center shrink-0">
+          {/* Right: Search Bar & Auth Buttons */}
+          <div className="flex items-center space-x-3 sm:space-x-4 shrink-0">
             <div className="relative group">
               <input 
                 type="text" 
                 placeholder="Search memes..." 
-                className="h-9 w-9 pl-9 pr-3 text-sm rounded-full bg-neutral-100 dark:bg-neutral-900 border border-transparent hover:border-neutral-200 dark:hover:border-neutral-800 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:w-48 focus:w-48 [&:not(:placeholder-shown)]:w-48 transition-all duration-300 ease-out text-neutral-900 dark:text-neutral-100 placeholder:text-transparent hover:placeholder:text-neutral-500 focus:placeholder:text-neutral-500 [&:not(:placeholder-shown)]:placeholder:text-neutral-500 cursor-pointer focus:cursor-text"
+                className="h-9 w-9 pl-9 pr-3 text-sm rounded-full bg-muted border border-transparent hover:border-border focus:outline-none focus:ring-2 focus:ring-ring hover:w-44 focus:w-44 sm:hover:w-48 sm:focus:w-48 [&:not(:placeholder-shown)]:w-44 sm:[&:not(:placeholder-shown)]:w-48 transition-all duration-300 ease-out text-foreground placeholder:text-transparent hover:placeholder:text-muted-foreground focus:placeholder:text-muted-foreground [&:not(:placeholder-shown)]:placeholder:text-muted-foreground cursor-pointer focus:cursor-text"
               />
               <svg 
-                className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500 pointer-events-none" 
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" 
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="none" 
                 viewBox="0 0 24 24" 
@@ -49,6 +40,12 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
+            <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Log In
+            </a>
+            <a href="/signup" className="text-sm font-medium bg-foreground text-background px-4 py-2 sm:px-5 sm:py-2.5 rounded-full hover:opacity-90 transition-opacity">
+              Sign Up
+            </a>
           </div>
         </div>
       </header>
@@ -56,38 +53,16 @@ export default function Home() {
       {/* Main Content */}
       <main className="container mx-auto px-6 py-12">
         <div className="mb-12 text-center">
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4">
-            Discover the best memes.
+          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground mb-4">
+            Discover the internet.
           </h2>
-          <p className="text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto">
-            A minimalistic space for maximum laughs. Scroll through the finest curated GIFs on the internet.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+            Scroll through the finest curated GIFs directly from Giphy. Search for reactions, emotions, or just raw chaos.
           </p>
         </div>
 
-        {/* Meme Grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-          {memes.map((meme, idx) => (
-            <div 
-              key={idx} 
-              className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800"
-            >
-              <img
-                src={meme.src}
-                alt={meme.alt}
-                width={meme.width}
-                height={meme.height}
-                className="w-full h-auto object-cover"
-                loading="lazy"
-              />
-              <div className="p-4 flex items-center justify-between">
-                <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                  Meme {idx + 1}
-                </span>
-                <LikeButton />
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Dynamic Giphy Feed */}
+        <GiphyFeed />
       </main>
     </div>
   );
