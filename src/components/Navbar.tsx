@@ -2,13 +2,55 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ThemeToggleLogo } from "@/components/ThemeToggleLogo";
-import { Menu, X, ExternalLink, Heart, Folder, Sparkles } from "lucide-react";
+import { supabase } from "@/lib/supabaseClient";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { Menu, X, ExternalLink, Heart, Folder, Sparkles, LogOut, User as UserIcon } from "lucide-react";
 
 export function Navbar() {
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
+
+  // Monitor Supabase authentication status in real-time
+  useEffect(() => {
+    let isMounted = true;
+
+    // Initial session retrieval
+    supabase.auth.getUser().then(({ data: { user: currentUser } }) => {
+      if (isMounted) {
+        setUser(currentUser ?? null);
+        setIsLoadingUser(false);
+      }
+    });
+
+    // Listen to real-time login, logout, and token refresh events
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (isMounted) {
+        setUser(session?.user ?? null);
+        setIsLoadingUser(false);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    setIsMobileMenuOpen(false);
+    router.push("/");
+    router.refresh();
+  };
 
   // Close mobile menu on Escape key press or click outside
   useEffect(() => {
@@ -51,6 +93,10 @@ export function Navbar() {
     };
   }, [isMobileMenuOpen]);
 
+  const displayName =
+    user?.user_metadata?.username ||
+    (user?.email ? user.email.split("@")[0] : "User");
+
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-border bg-background/80 transition-colors">
       <div className="container mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between relative">
@@ -92,7 +138,7 @@ export function Navbar() {
           </a>
         </nav>
 
-        {/* Right: Search Bar, Auth Buttons, & Mobile Toggle */}
+        {/* Right: Search Bar, Dynamic Auth / User Profile, & Mobile Toggle */}
         <div className="flex items-center space-x-2 sm:space-x-4 shrink-0">
           {/* Expandable Search Input */}
           <div className="relative group">
@@ -119,20 +165,49 @@ export function Navbar() {
             </svg>
           </div>
 
-          {/* Desktop Auth Buttons */}
+          {/* Desktop Auth Section */}
           <div className="hidden md:flex items-center space-x-3">
-            <Link
-              href="/login"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
-            >
-              Log In
-            </Link>
-            <Link
-              href="/signup"
-              className="text-sm font-medium bg-foreground text-background px-4 py-2 sm:px-5 sm:py-2.5 rounded-full hover:opacity-90 active:scale-95 transition-all shadow-sm"
-            >
-              Sign Up
-            </Link>
+            {isLoadingUser ? (
+              // Placeholder skeleton to avoid layout shift
+              <div className="h-9 w-24 rounded-full bg-muted animate-pulse" />
+            ) : user ? (
+              // Authenticated User Profile & Sign Out
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/70 border border-border">
+                  <div className="h-6 w-6 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-sm">
+                    {displayName[0]?.toUpperCase() || "U"}
+                  </div>
+                  <span className="text-xs font-semibold text-foreground max-w-[110px] truncate">
+                    {displayName}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-destructive hover:bg-destructive/10 px-3 py-1.5 rounded-full border border-border transition-colors cursor-pointer"
+                  title="Sign Out"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            ) : (
+              // Unauthenticated Log In & Sign Up Buttons
+              <>
+                <Link
+                  href="/login"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1"
+                >
+                  Log In
+                </Link>
+                <Link
+                  href="/signup"
+                  className="text-sm font-medium bg-foreground text-background px-4 py-2 sm:px-5 sm:py-2.5 rounded-full hover:opacity-90 active:scale-95 transition-all shadow-sm"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Hamburger Button */}
@@ -160,7 +235,7 @@ export function Navbar() {
         ref={menuRef}
         aria-hidden={!isMobileMenuOpen}
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-b border-border bg-background/95 backdrop-blur-2xl ${
-          isMobileMenuOpen ? "max-h-[400px] opacity-100 py-4 shadow-xl" : "max-h-0 opacity-0 py-0 pointer-events-none"
+          isMobileMenuOpen ? "max-h-[460px] opacity-100 py-4 shadow-xl" : "max-h-0 opacity-0 py-0 pointer-events-none"
         }`}
       >
         <div className="container mx-auto px-6 flex flex-col space-y-4">
@@ -198,22 +273,52 @@ export function Navbar() {
 
           <div className="h-px bg-border my-1" />
 
-          {/* Mobile Auth Actions */}
-          <div className="flex flex-col space-y-2 pt-1 pb-2">
-            <Link
-              href="/login"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center text-sm font-medium py-2.5 rounded-xl border border-border text-foreground hover:bg-muted transition-colors"
-            >
-              Log In
-            </Link>
-            <Link
-              href="/signup"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center text-sm font-medium py-2.5 rounded-xl bg-foreground text-background hover:opacity-90 active:scale-[0.99] transition-all shadow-sm"
-            >
-              Sign Up
-            </Link>
+          {/* Mobile Auth Actions: Dynamically switches based on auth state */}
+          <div className="pt-1 pb-2">
+            {isLoadingUser ? (
+              <div className="h-10 w-full rounded-xl bg-muted animate-pulse" />
+            ) : user ? (
+              <div className="flex flex-col space-y-3">
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/60 border border-border">
+                  <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-sm flex items-center justify-center shrink-0 shadow-sm">
+                    {displayName[0]?.toUpperCase() || "U"}
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-sm font-bold text-foreground truncate">
+                      {displayName}
+                    </span>
+                    <span className="text-xs text-muted-foreground truncate">
+                      {user.email}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="w-full inline-flex items-center justify-center gap-2 text-sm font-medium py-2.5 rounded-xl border border-destructive/20 text-destructive hover:bg-destructive/10 active:scale-[0.99] transition-all cursor-pointer"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col space-y-2">
+                <Link
+                  href="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full text-center text-sm font-medium py-2.5 rounded-xl border border-border text-foreground hover:bg-muted transition-colors"
+                >
+                  Log In
+                </Link>
+                <Link
+                  href="/signup"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full text-center text-sm font-medium py-2.5 rounded-xl bg-foreground text-background hover:opacity-90 active:scale-[0.99] transition-all shadow-sm"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
